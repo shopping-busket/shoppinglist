@@ -1,4 +1,6 @@
+tsconfig.json
 uuid.d.ts
+
 .idea
 .idea/*
 .idea/**/*
