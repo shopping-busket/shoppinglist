@@ -7,7 +7,11 @@ import {v4 as uuidv4} from 'uuid';
 export interface IShoppingListItem {
   id: string,
   name: string,
-  done: boolean,
+  done?: boolean,
+}
+
+export interface IShoppingListEntries {
+  items: IShoppingListItem[]
 }
 
 export interface IShoppingList {
@@ -16,12 +20,8 @@ export interface IShoppingList {
   description: string,
   listid: string,
   owner: string,
-  entries: {
-    items: IShoppingListItem[],
-  },
-  checkedEntries: {
-    items: IShoppingListItem[],
-  },
+  entries: IShoppingListEntries,
+  checkedEntries: IShoppingListEntries,
   additional: {
     loading: boolean,
   },
@@ -62,10 +62,12 @@ export interface ShoppingListItemWithIndex extends ShoppingListItem {
   index: number,
 }
 
+export type EntryList = 'entries' | 'checkedEntries';
+
 // eslint-disable-next-line max-classes-per-file
 export class ShoppingListItem {
   public name: string;
-  public done: boolean;
+  public done?: boolean;
   public id: string;
   public additional: AdditionalItemData;
 
