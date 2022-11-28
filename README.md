@@ -15,6 +15,7 @@ to suppress typescript lib errors place a file called `tsconfig.json` in the roo
 {
   "compilerOptions": {
     "target": "es2018",
+    "lib": ["es2018"],
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true
