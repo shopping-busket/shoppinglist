@@ -1,6 +1,8 @@
 // eslint-disable-next-line max-classes-per-file
-import { v4 as uuidv4 } from 'uuid';
+// @ts-ignore
+// noinspection JSUnusedGlobalSymbols
 
+import { v4 as uuidv4 } from 'uuid';
 export interface IShoppingListItem {
     id: string,
     name: string,
