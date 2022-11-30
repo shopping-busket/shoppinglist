@@ -2,7 +2,7 @@
 // @ts-ignore
 // noinspection JSUnusedGlobalSymbols
 
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 export interface IShoppingListItem {
   id: string,
@@ -11,7 +11,7 @@ export interface IShoppingListItem {
 }
 
 export interface IShoppingListEntries {
-  items: IShoppingListItem[]
+  items: IShoppingListItem[];
 }
 
 export interface IShoppingList {
@@ -28,7 +28,7 @@ export interface IShoppingList {
 }
 
 interface ErrorConstructor {
-  captureStackTrace(thisArg: any, func: any): void
+  captureStackTrace(thisArg: any, func: any): void;
 }
 
 // eslint-disable-next-line max-classes-per-file
