@@ -12,6 +12,9 @@ export interface LogEvent {
   entryId: string,
   state: {
     name: string,
+    /**
+     * @deprecated done is deprecated since 23.11.2022. Just emit with {@link EventType} set to {@link EventType.MARK_ENTRY_DONE} or {@link EventType.MARK_ENTRY_TODO}
+     */
     done?: boolean,
     aboveEntry?: string,
     belowEntry?: string,
