@@ -7,24 +7,28 @@ export enum EventType {
   MARK_ENTRY_TODO = 'MARK_ENTRY_TODO',
 }
 
-export interface LogEvent {
+export interface EventData {
   event: EventType,
   entryId: string,
+  sender?: string,
+  isoDate: string,
   state: {
     name: string,
     /**
      * @deprecated done is deprecated since 23.11.2022. Just emit with {@link EventType} set to {@link EventType.MARK_ENTRY_DONE} or {@link EventType.MARK_ENTRY_TODO}
      */
     done?: boolean,
-    aboveEntry?: string,
-    belowEntry?: string,
     oldIndex?: number,
     newIndex?: number,
   },
-  isoDate: string,
+}
+
+export interface LogEvent {
+  listid: string,
+  eventData: EventData
 }
 
 export interface LogEventListenerData {
   listid: string,
-  eventData: LogEvent,
+  eventData: EventData,
 }

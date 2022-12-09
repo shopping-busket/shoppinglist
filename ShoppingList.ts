@@ -104,18 +104,26 @@ export default class ShoppingList {
    * @param description Description of the list
    * @param owner
    * @param entries (optional) Pass already existing [IShoppingListItems]{@link IShoppingListItem}.
+   * @param checkedEntries (optional) Pass already existing [IShoppingListItems]{@link IShoppingListItem}.
    */
-  constructor(name: string, description: string, owner?: string, entries?: IShoppingListItem[]) {
+  constructor(name: string, description: string, owner?: string, entries?: IShoppingListItem[], checkedEntries?: IShoppingListItem[]) {
     this.name = name;
     this.description = description;
     this.listid = uuidv4();
     this.owner = owner ?? '';
 
-    // Convert database shopping list item type to class type
-    if (!entries) return;
-    entries.forEach((t) => {
-      this.entries.push(new ShoppingListItem(t.name, t.done, t.id));
-    });
+    // Convert database shopping list item (IShoppingListItem) type to class type
+    if (entries) {
+      entries.forEach((t) => {
+        this.entries.push(new ShoppingListItem(t.name, t.done, t.id));
+      });
+    }
+
+    if (checkedEntries) {
+      checkedEntries.forEach((t) => {
+        this.checkedEntries.push(new ShoppingListItem(t.name, t.done, t.id));
+      });
+    }
   }
 
   /**
