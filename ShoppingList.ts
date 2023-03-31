@@ -131,17 +131,13 @@ export default class ShoppingList {
     let entry;
 
     ['entries', 'checkedEntries'].every((k) => {
-      console.log(k);
-
       entry = this[k as 'entries'].find((_v, _i, _obj) => {
-        console.log(_v);
         const condition = predicate(_v, _i, _obj);
         if (condition) index = _i;
 
         return condition;
       }) as ShoppingListItemWithIndex;
 
-      console.log(entry);
       if (entry === undefined) return true;
       entry.index = index;
       return false;
