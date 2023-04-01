@@ -100,16 +100,17 @@ export default class ShoppingList {
 
   /**
    * Create a new list.
+   * @param listId UUIDv4 of the list
    * @param name Name of the new list
    * @param description Description of the list
    * @param owner
    * @param entries (optional) Pass already existing [IShoppingListItems]
    * {@param checkedEntries @link IShoppingListItem} (optional) Pass already existing [IShoppingListItems] (only checked)
    */
-  constructor(name: string, description: string, owner?: string, entries?: IShoppingListItem[], checkedEntries?: IShoppingListItem[]) {
+  constructor(listId: string, name: string, description: string, owner?: string, entries?: IShoppingListItem[], checkedEntries?: IShoppingListItem[]) {
     this.name = name;
     this.description = description;
-    this.listid = uuidv4();
+    this.listid = listId;
     this.owner = owner ?? '';
 
     // Convert database shopping list item type to class type
