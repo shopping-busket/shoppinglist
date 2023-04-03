@@ -9,6 +9,7 @@ If you want to work on this file independently add a `uuid.d.ts` file and put th
 
 ```ts
 export function v4(): string;
+
 export as namespace uuid;
 ```
 
@@ -18,7 +19,9 @@ to suppress typescript lib errors place a file called `tsconfig.json` in the roo
 {
   "compilerOptions": {
     "target": "es2018",
-    "lib": ["es2018"],
+    "lib": [
+      "es2018"
+    ],
     "module": "commonjs",
     "strict": true,
     "esModuleInterop": true
