@@ -7,11 +7,6 @@ import { v4 as uuidv4 } from 'uuid';
 export interface IShoppingListItem {
   id: string,
   name: string,
-  done?: boolean,
-}
-
-export interface IShoppingListEntries {
-  items: IShoppingListItem[];
 }
 
 export interface IShoppingList {
@@ -20,8 +15,8 @@ export interface IShoppingList {
   description: string,
   listid: string,
   owner: string,
-  entries: IShoppingListEntries,
-  checkedEntries: IShoppingListEntries,
+  entries: IShoppingListItem[],
+  checkedEntries: IShoppingListItem[],
   additional: {
     loading: boolean,
   },
@@ -67,24 +62,22 @@ export type EntryList = 'entries' | 'checkedEntries';
 // eslint-disable-next-line max-classes-per-file
 export class ShoppingListItem {
   public name: string;
-  public done?: boolean;
   public id: string;
   public additional: AdditionalItemData;
 
   /**
-   * Create a new list item without pushing it to a lists dict.
+   * Create a new list item without pushing it to a list's dict.
+   @deprecated `done` param removed since April 5th, '23
    * @param name List item name
-   * @param done (default: false) Mark as done once created
    * @param id (optional) When id is passed, none will be created.
    * @param additional (default: { edit: false, editName: name }) Additional data (only used by frontend)
    */
-  constructor(name: string, done = false, id?: string, additional: AdditionalItemData = {
+  constructor(name: string, id?: string, additional: AdditionalItemData = {
     edit: false,
     editName: name,
     focused: false,
   }) {
     this.name = name.trim();
-    this.done = done;
     this.id = id ?? uuidv4();
     this.additional = additional;
   }
@@ -115,12 +108,27 @@ export default class ShoppingList {
 
     // Convert database shopping list item type to class type
     entries?.forEach((t) => {
-      this.entries.push(new ShoppingListItem(t.name, t.done, t.id));
+      this.entries.push(new ShoppingListItem(t.name, t.id));
     });
 
     checkedEntries?.forEach((t) => {
-      this.checkedEntries.push(new ShoppingListItem(t.name, t.done, t.id));
+      this.checkedEntries.push(new ShoppingListItem(t.name, t.id));
     });
+  }
+
+  /**
+   * Create a new ShoppingList instance from a IShoppingList interface
+   * @param list Data to be used for creation
+   */
+  public static from(list: IShoppingList): ShoppingList {
+    return new ShoppingList(list.listid, list.name, list.description, list.owner, list.entries, list.checkedEntries);
+  }
+
+  /**
+   * Returns all entries (checked and todos)
+   */
+  get globalEntries(): ShoppingListItem[] {
+    return [...this.entries, ...this.checkedEntries];
   }
 
   /**
@@ -186,7 +194,7 @@ export default class ShoppingList {
    */
   public createItem(name: string): ShoppingListItem {
     const id = uuidv4();
-    this.entries.unshift(new ShoppingListItem(name, undefined, id));
+    this.entries.unshift(new ShoppingListItem(name, id));
 
     const item = this.entries.find((t) => t.id === id);
 
@@ -212,8 +220,8 @@ export default class ShoppingList {
    * @return {IShoppingListItem[]} All the items marked as done before deletion, to, for example: push the values to log.
    */
   public clearDone(): IShoppingListItem[] {
-    const del = this.checkedEntries.filter((t) => t.done);
-    this.checkedEntries = this.checkedEntries.filter((t) => !t.done);
+    const del = this.checkedEntries;
+    this.checkedEntries = [];
 
     return del;
   }
@@ -229,12 +237,8 @@ export default class ShoppingList {
       description: this.description,
       listid: this.listid,
       owner: this.owner,
-      entries: {
-        items: this.entries,
-      },
-      checkedEntries: {
-        items: this.checkedEntries,
-      },
+      entries: this.entries,
+      checkedEntries: this.checkedEntries,
       additional: {
         loading: false,
       },

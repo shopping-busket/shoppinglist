@@ -28,7 +28,4 @@ export interface LogEvent {
   eventData: EventData
 }
 
-export interface LogEventListenerData {
-  listid: string,
-  eventData: EventData,
-}
+export type LogEventListenerData = LogEvent;
