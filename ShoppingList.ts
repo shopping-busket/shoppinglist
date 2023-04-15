@@ -9,6 +9,10 @@ export interface IShoppingListItem {
   name: string,
 }
 
+export interface  LegacyShoppingListItem extends IShoppingListItem {
+  done: boolean,
+}
+
 export interface IShoppingList {
   id: number,
   name: string,
