@@ -180,13 +180,13 @@ export default class ShoppingList {
 
     if (check) {
       console.log('condition 1');
-      this.checkedEntries.push(item);
+      this.checkedEntries.unshift(item);
       this.entries.splice(i, 1);
     } else {
       console.log('condition 2');
 
       this.checkedEntries.splice(i, 1);
-      this.entries.push(item);
+      this.entries.unshift(item);
     }
   }
 
