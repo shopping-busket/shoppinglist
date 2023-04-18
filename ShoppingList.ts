@@ -194,10 +194,10 @@ export default class ShoppingList {
    * Create a new list item and push it to the lists items.
    * @summary Create list item
    * @param name The name of the item.
+   * @param id (optional) uuidv4 the item should have, if not specified a new one will be generated
    * @returns {ShoppingListItem} Shopping list item
    */
-  public createItem(name: string): ShoppingListItem {
-    const id = uuidv4();
+  public createItem(name: string, id = uuidv4()): ShoppingListItem {
     this.entries.unshift(new ShoppingListItem(name, id));
 
     const item = this.entries.find((t) => t.id === id);
