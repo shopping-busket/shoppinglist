@@ -213,7 +213,7 @@ export default class ShoppingList {
    * @param name New name
    */
   public renameItem(id: string, name: string): void {
-    const item = this.entries.find((t) => t.id === id);
+    const item = this.globalEntries.find((t) => t.id === id);
     if (!item) return;
 
     item.name = name;
