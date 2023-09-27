@@ -5,6 +5,7 @@ export enum EventType {
   CHANGED_ENTRY_NAME = 'CHANGED_ENTRY_NAME',
   MARK_ENTRY_DONE = 'MARK_ENTRY_DONE',
   MARK_ENTRY_TODO = 'MARK_ENTRY_TODO',
+  CLEAR_DONE = 'CLEAR_DONE',
 }
 
 export interface EventData {
