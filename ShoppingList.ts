@@ -94,6 +94,7 @@ export default class ShoppingList {
   public owner = '';
   public entries: ShoppingListItem[] = [];
   public checkedEntries: ShoppingListItem[] = [];
+  public dbId: number = -1
 
   /**
    * Create a new list.
@@ -104,11 +105,12 @@ export default class ShoppingList {
    * @param entries (optional) Pass already existing [IShoppingListItems]
    * {@param checkedEntries @link IShoppingListItem} (optional) Pass already existing [IShoppingListItems] (only checked)
    */
-  constructor(listId: string, name: string, description: string, owner?: string, entries?: IShoppingListItem[], checkedEntries?: IShoppingListItem[]) {
+  constructor(listId: string, name: string, description: string, owner?: string, entries?: IShoppingListItem[], checkedEntries?: IShoppingListItem[], dbId: number = -1) {
     this.name = name;
     this.description = description;
     this.listid = listId;
     this.owner = owner ?? '';
+    this.dbId = dbId;
 
     // Convert database shopping list item type to class type
     entries?.forEach((t) => {
@@ -234,7 +236,7 @@ export default class ShoppingList {
    * Convert class instance to interface
    * @param id database id
    */
-  public toInterface(id: number): IShoppingList {
+  public toInterface(id: number = this.dbId): IShoppingList {
     return {
       id,
       name: this.name,
