@@ -9,7 +9,7 @@ export interface IShoppingListItem {
   name: string,
 }
 
-export interface  LegacyShoppingListItem extends IShoppingListItem {
+export interface LegacyShoppingListItem extends IShoppingListItem {
   done: boolean,
 }
 
@@ -94,7 +94,7 @@ export default class ShoppingList {
   public owner = '';
   public entries: ShoppingListItem[] = [];
   public checkedEntries: ShoppingListItem[] = [];
-  public dbId: number = -1
+  public dbId: number = -1;
 
   /**
    * Create a new list.
@@ -123,18 +123,18 @@ export default class ShoppingList {
   }
 
   /**
+   * Returns all entries (checked and todos)
+   */
+  get globalEntries(): ShoppingListItem[] {
+    return [...this.entries, ...this.checkedEntries];
+  }
+
+  /**
    * Create a new ShoppingList instance from a IShoppingList interface
    * @param list Data to be used for creation
    */
   public static from(list: IShoppingList): ShoppingList {
     return new ShoppingList(list.listid, list.name, list.description, list.owner, list.entries, list.checkedEntries);
-  }
-
-  /**
-   * Returns all entries (checked and todos)
-   */
-  get globalEntries(): ShoppingListItem[] {
-    return [...this.entries, ...this.checkedEntries];
   }
 
   /**
