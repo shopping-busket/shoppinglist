@@ -9,7 +9,6 @@ export enum EventType {
 }
 
 export interface EventData {
-  storeId: number | undefined,
   event: EventType,
   entryId: string,
   sender?: string,
