@@ -21,6 +21,13 @@ export interface IRecipe {
   };
 }
 
+export enum CrudFlag {
+  CREATE,
+  READ,
+  UPDATE,
+  DELETE
+}
+
 export interface IIngredient {
   id: number;
   recipeId: number;
@@ -28,4 +35,5 @@ export interface IIngredient {
   hint?: string;
   amount?: number;
   unit?: string;
+  flag?: CrudFlag;
 }
