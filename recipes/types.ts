@@ -8,6 +8,10 @@ export interface IRecipeStep {
   headerImagePath?: string;
   headerImageAlt?: string;
   headerImageNote?: string;
+
+  frontend?: {
+    isEditing: boolean;
+  }
 }
 
 export interface IRecipe {
