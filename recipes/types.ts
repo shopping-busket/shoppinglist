@@ -20,6 +20,7 @@ export interface IRecipe {
   description: string;
   ownerId: number;
   owner: {
+    uuid: string,
     fullName: string;
     avatarURI?: string;
   };
