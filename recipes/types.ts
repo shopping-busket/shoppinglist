@@ -1,20 +1,22 @@
-export interface IRecipeStep {
+export interface IImageUploadData {
+  headerImagePath: string | null;
+  headerImageAlt: string | null;
+  headerImageNote: string | null;
+}
+
+export interface IRecipeStep extends IImageUploadData {
   id: number;
   recipeId: number;
   stepNumber: number;
   title: string;
   content: string;
 
-  headerImagePath?: string;
-  headerImageAlt?: string;
-  headerImageNote?: string;
-
   frontend?: {
     isEditing: boolean;
-  }
+  };
 }
 
-export interface IRecipe {
+export interface IRecipe extends IImageUploadData {
   id: number;
   title: string;
   description: string;
