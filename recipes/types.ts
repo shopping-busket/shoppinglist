@@ -16,16 +16,18 @@ export interface IRecipeStep extends IImageUploadData {
   };
 }
 
+export interface IRecipeOwner {
+  uuid: string,
+  fullName: string;
+  avatarURI?: string;
+}
+
 export interface IRecipe extends IImageUploadData {
   id: number;
   title: string;
   description: string;
   ownerId: number;
-  owner: {
-    uuid: string,
-    fullName: string;
-    avatarURI?: string;
-  };
+  owner: IRecipeOwner;
 }
 
 export enum CrudFlag {
